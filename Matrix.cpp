@@ -41,19 +41,20 @@ vector<vector<int>> Matrix::addMatrices()
 
  for (int i = 0; i < r_max; i++)
  {
+	 vector<int> v;
+	 resultant_matrix.push_back(v);
+	 //resultant_matrix.push_back(*(new vector<int>)); //
 	 for (int j = 0; j < c_max; j++)
 	 {
-		 resultant_matrix[i][j] = matrix_1[i][j] + matrix_2[i][j];
+		 resultant_matrix[i].push_back( matrix_1[i][j] + matrix_2[i][j]);
 	 }
  }
 
-
  cout << "\n  Values of the resultant matrix: " << endl << endl;
-
 
  printoutMatrix(resultant_matrix);
 
- return matrix_1;//resultant_matrix;
+ return resultant_matrix;
 }
 
 
@@ -104,7 +105,6 @@ vector<vector<int>> Matrix::putin()
 }
 
 
-	
 
 //*************************************************************************************************************
 
