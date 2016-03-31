@@ -3,7 +3,8 @@
 #include<vector>       
 #include<cstdlib>  //for exit
 #include "Menu.h"
-//#include "Matrix.h"
+#include "Matrix.h"
+class Matrix;
 
 
 vector<string>choose;
@@ -42,37 +43,47 @@ void Menu::showMenu()
 void Menu::getNumber()
 {
 
+	Matrix mat;
 
+
+
+	//Choose of the number
 	int chosen_number;
-	cin >> chosen_number;
+	std::cin >> chosen_number;
 
 	switch (chosen_number)
 	{
 	case polynomial:
-		cout << "You choose poly" << endl;
+		cout << "\n You choose poly" << endl;
 		//function of poly
 		break;
-	case matrix:
-		cout << "You choose matrix" << endl;
-		break;
 
+	case matrix:
+		cout << "\n You choose matrix" << endl<<endl;
+	
+		mat.addMatrices();
+		
+	//
+			break;
 
 
 		//function of matrix
 	case equation:
-		cout << "You choose equation" << endl;
+		cout << "\n You choose equation" << endl;
 		//function of 
 
-		//Matrix mat;
-		//mat.putin();
 		break;
 
 	case goexit:
 		exit(1);
 
 	default:
-		cout << "O o o try again" << endl;
-
+		
+		cout << "\n O o o try again" << endl;
+		
+		//Menu again;
+		//again.showMenu;  zrobic cos zeby dzialalo - znowu wywoluje getNumber czyli troche rekurencja-czy zwraca warosc?
+	
 	}
 
 }
