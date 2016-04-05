@@ -62,7 +62,7 @@ void Menu::getNumber()
 		cout << "\n You choose matrix" << endl<<endl;
 	
 		mat.addMatrices();
-		
+		//mat.putin();
 	//
 			break;
 

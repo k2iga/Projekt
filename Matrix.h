@@ -17,11 +17,11 @@ public:
 	
 	void Matrix::printoutMatrix(vector<vector<int>> matrix);
 	
-	std::vector<std::string> split(const std::string &s, char delim=',');
+	vector<string> split(const string &s, char delim=',');
+	void printMatrixInputMethod();
 
 
 	
-
 };
 
 #endif

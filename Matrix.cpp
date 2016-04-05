@@ -4,12 +4,10 @@
 #include<vector>   
 #include"Matrix.h"
 
-using namespace std;
 
 // Default constructor:
 Matrix::Matrix()
-{
-	
+{	
 }
 
 //Adding matrices
@@ -19,12 +17,7 @@ vector<vector<int>> Matrix::addMatrices()
 
  vector<vector<int>>resultant_matrix;
 
-
-	cout << " Please enter the values of matrix like this :" << endl << endl;
-	cout << " 1,2,3q4,5,6"<<"\t It appears as" << endl << endl;
-
-	cout << " 1 2 3" << endl;
-	cout << " 4 5 6" << endl << endl;
+ printMatrixInputMethod();
 
  vector<vector<int>>matrix_1 = putin();
 
@@ -43,7 +36,7 @@ vector<vector<int>> Matrix::addMatrices()
  {
 	 vector<int> v;
 	 resultant_matrix.push_back(v);
-	 //resultant_matrix.push_back(*(new vector<int>)); //
+	 //resultant_matrix.push_back(*(new vector<int>));
 	 for (int j = 0; j < c_max; j++)
 	 {
 		 resultant_matrix[i].push_back( matrix_1[i][j] + matrix_2[i][j]);
@@ -57,64 +50,99 @@ vector<vector<int>> Matrix::addMatrices()
  return resultant_matrix;
 }
 
-
-//Taking values of matrix from user
+//Taking values of matrix from user  PUTIN 
 
 vector<vector<int>> Matrix::putin()
 
 {
 	vector<vector<int>>matrix_one;
+	vector<string>first_split;
+	string::size_type position;
 
 	string user_input;
 
-	cin >> user_input;
+	int size_of_row = 1;//moze na dol
 
-	vector<string>first_split = split(user_input, 'q');
-
-	
-	for (int i = 0; i < first_split.size(); i++)
+	do
 	{
+		cin >> user_input;
+		position = user_input.find("q"); // search for "q"
 
-		vector<string>inputs_vector = split(first_split[i]);
+			first_split = split(user_input);
 
-		//Convertion to integer with printing - or not
+        //Resize vector if there is "q" inside, cause q can't be transform into integer
+			for (int i = 0; i < first_split.size(); i++)
+			{
+				if (first_split[i]=="q")
+				{
+					first_split.resize(first_split.size()-1);
+				}
 
-		vector<int>row_vector;
+			}
 
-		for (int i = 0; i < inputs_vector.size(); i++)
+          
+		//Fill empty spaces with zeros
+			for (int i = 0; i < first_split.size(); i++)
+			{
+				if (first_split[i].empty())
+				{
+					first_split[i] = "0";
+				}
+				
+			}
+			
+			//Convertion to integers and push to row vector
+			vector<int>row_vector;
+
+			for (int i = 0; i < first_split.size(); i++)
+			{
+				row_vector.push_back(stoi(first_split[i]));           //potworek
+				//cout << "\t" << row_vector[i];   //not
+			}
+
+			if (size_of_row < row_vector.size())
+			{
+				size_of_row = row_vector.size();
+			}
+
+			matrix_one.push_back(row_vector);
+
+	} while (position == string::npos);
+
+
+	//Resize to have the same length of rows
+
+	for (int i = 0; i < matrix_one.size(); i++)
+	{
+		if (matrix_one[i].size() < size_of_row)
+
 		{
-
-			row_vector.push_back(stoi(inputs_vector[i]));           //potworek
-			//std::cout << "\t" << row_vector[i];
-
+			matrix_one[i].resize(size_of_row, 0);
 		}
-		//cout << endl;
-
-		matrix_one.push_back(row_vector);
 	}
 
-	cout << "\n Congrats, Here is your matrix! " << endl << endl;
 
-	//Printout of user input as a matrix
 
-	printoutMatrix(matrix_one);
-	
-	
+			std::cout << "\n Congrats, Here is your matrix! " << endl << endl;
+
+			//Printout of user input as a matrix
+
+			printoutMatrix(matrix_one);
+
 	return  matrix_one;
 
 }
 
 
-
 //*************************************************************************************************************
 
-std::vector<std::string> Matrix::split(const std::string & s, char delim)
+vector<string> Matrix::split(const string & s, char delim)
 {
 	vector<string> elems;
 
 	stringstream ss(s); //creating  string stream object
 	string item; //creating string object
-	while (std::getline(ss, item, delim))
+	while (getline(ss, item, delim))
 	{                //as long as getline returns true value it rewrites from stringstream another stringstream  into 'item')
 		             //Variables are separated by delim
 		elems.push_back(item); //insert 'item' into vector
@@ -143,6 +171,28 @@ void Matrix::printoutMatrix(vector<vector<int>> matrix)
 
 	}
 }
+
+
+//Information for the user how matrix should be entered
+
+void Matrix::printMatrixInputMethod()
+{
+
+	cout << " Please enter the values of matrix like this :" << endl << endl;
+	cout << " 1,2,3  \t press enter " << endl;
+	cout << " 4,,6   \t press enter " << endl;
+	cout << " 7,8,9q \t press enter, \"q\" informs that this is last row of matrix" << endl;
+		
+
+	cout<<"\t It prints out the  following output:" << endl << endl;
+
+	cout << " 1 2 3" << endl;
+	cout << " 4 0 6" << endl;
+	cout << " 7 8 9" << endl<< endl;
+
+
+}
+
 
 
 //void Matrix::printVector(vector<int>)
