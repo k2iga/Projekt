@@ -11,11 +11,9 @@ int main()
 
 {
 	
-
 	Menu pokaz;
-	pokaz.showMenu();
+	pokaz.start();
 		
- 
 	system("pause");
 }
 
