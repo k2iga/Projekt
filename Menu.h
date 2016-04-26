@@ -8,22 +8,23 @@
 #ifndef MENU_H
 #define MENU_H
 
-
+#include<vector>
 class Matrix;
 
 using namespace std;
 
-enum chooseMenu { polynomial = 0, matrix = 1, equation = 2, goexit = 3 };
-
+enum chooseMenu { goexit= 0, matrix = 1, equation = 2, polynomial = 3 };
+enum chooseMatrix{add = 1, multiply = 2, determinant = 3 };
 
 class Menu
 {
 	
 public:
 	
-	
+	void start(); //to start the program
 	void getNumber();       //to get user choice 
-	void showMenu();      //to show all menu options
+	void showMenu(vector<string>);      //to show all menu options
+	void Matrix_submenu(); // to show matrices menu options
  Menu(); 
 
 

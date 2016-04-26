@@ -4,11 +4,12 @@
 #include<vector>   
 #include"Matrix.h"
 
-
 // Default constructor:
 Matrix::Matrix()
-{	
+{
 }
+
+//********************************************************************************************************
 
 //Adding matrices
 
@@ -26,8 +27,10 @@ vector<vector<int>> Matrix::addMatrices()
  cout << "\n Please enter the values of latter matrix:" << endl << endl;
  vector<vector<int>>matrix_2= putin();
 
+
  int r_max = matrix_1.size();    //Number of rows (assuming is the same for both matrices) 
  int c_max = matrix_1[0].size();  //Number of columns
+
 
  //Matrix addition
  for (int i = 0; i < r_max; i++)
@@ -48,6 +51,124 @@ vector<vector<int>> Matrix::addMatrices()
  return resultant_matrix;
 }
 
+//***************************************************************************************************************
+
+//Matrix multiplication
+vector<vector<int> > Matrix::multiplyMatrices()
+{
+	vector<vector<int> >resultant_multiply;
+
+	//Show how to type
+	printMatrixInputMethod();
+
+//Caution
+	cout << "\n Number of raws of second matrix should be equal \n to number of columns of first matrix! "<<endl<<endl;
+
+	//Take values for first matrix
+	vector<vector<int>>matrix_1 = putin();
+
+	//Take values for second matrix
+	cout << "\n Please enter the values of latter matrix:" << endl << endl;
+	vector<vector<int>>matrix_2 = putin();
+
+	int r_max1 = matrix_1.size();    //Number of rows, mat 1 
+	int c_max1 = matrix_1[0].size();  //Number of columns, mat 1
+
+	int r_max2 = matrix_2.size();    //Number of rows, mat 2 
+	int c_max2 = matrix_2[0].size();  //Number of columns, mat 2
+
+
+
+	if (c_max1 == r_max2)          //Check if we can multiply 
+	{
+		cout << "\n I can multiply it! " << endl;
+		
+		for (int i = 0; i < r_max1; i++)
+		{
+			vector<int>rv; //row vector
+
+			for (int j = 0; j < c_max2; j++)
+
+			{
+				int mn = 0;
+
+				for (int k = 0; k < r_max2; k++)
+				{
+					mn += matrix_1[i][k] * matrix_2[k][j]; //mn=mn+ ...
+
+				}
+				rv.push_back(mn);
+			}
+
+			resultant_multiply.push_back(rv);
+		}
+
+		printoutMatrix(resultant_multiply);
+
+	}
+	else
+	cout << "\n Multiplication can't be done ;/" << endl;
+
+	return resultant_multiply;
+}
+
+//*******************************************************************************************************
+//Determinant of matrix
+int Matrix::detMatrix()
+{
+	
+
+	//Show how to type
+	printMatrixInputMethod();
+
+	//Caution
+	cout << "\n Please type the values of matrix, remember that matrix must be square " << endl << endl;
+
+	//Take values for first matrix
+	vector<vector<int>>mat = putin();
+
+
+	int r_max1 = mat.size();    //Number of rows, mat 1 
+	int c_max1 = mat[0].size();  //Number of columns, mat 1
+
+	if (r_max1 == c_max1)
+	{
+		cout << "\n I can count it! " << endl;
+
+		int det=1; //determinant
+
+		// creating triangle matrix
+		for (int k = 0; k < r_max1 - 1; k++)
+		{
+			
+			for (int i = k + 1; i < r_max1; i++)
+			{
+				for (int j = r_max1 - 1; j >= k; j--)
+				{
+					mat[i][j] = mat[i][j] - mat[i][k] * mat[k][j] / mat[k][k];
+				}
+			}
+		}
+		//Determinant
+		for (int i = 0; i < r_max1; i++)
+		{
+			det = det * mat[i][i];
+		}
+		cout << "Determinant of given matrix is: " << det<< endl<<endl;
+
+		
+	}
+	else
+		cout << "I can't count it ;( matrix must be square" << endl;
+
+	return 3;
+}
+
+
+
+
+//************************************************************************************
+
 //Taking values of matrix from user   
 
 vector<vector<int>> Matrix::putin()
@@ -59,7 +180,7 @@ vector<vector<int>> Matrix::putin()
 	string user_input;
 
 	int size_of_row = 1;// default lenght of the shortest row in matrix, assumes at least 1 value
-
+	
 	do
 	{
 		cin >> user_input; // take string from user
@@ -110,7 +231,7 @@ vector<vector<int>> Matrix::putin()
 //*Resize all vectors in matrix to have the same size - which is specifed by "size_of_row"
  for (int i = 0; i < matrix_one.size(); i++)
 	{
-		if (matrix_one[i].size() < size_of_row)
+		if (matrix_one[i].size()< size_of_row)
 
 		{
 			matrix_one[i].resize(size_of_row, 0); // resize vectors and fill extra place with zeros 
