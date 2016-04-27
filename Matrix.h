@@ -18,6 +18,7 @@ public:
 
 	void printoutMatrix(vector<vector<int>> matrix);
 	vector < vector<int>> multiplyMatrices();
+	double determinant(vector<vector<int>> mat, int r_max1);
 	int detMatrix();
 	vector<string> split(const string &s, char delim=',');
 	void printMatrixInputMethod();

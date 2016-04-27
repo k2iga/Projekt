@@ -2,9 +2,10 @@
 #include<string>
 #include <sstream>
 #include<vector>   
+#include<cmath>
 #include"Matrix.h"
 
-// Default constructor:
+// detault constructor:
 Matrix::Matrix()
 {
 }
@@ -113,10 +114,10 @@ vector<vector<int> > Matrix::multiplyMatrices()
 }
 
 //*******************************************************************************************************
-//Determinant of matrix
+//Determinant of matrix-taking values
 int Matrix::detMatrix()
 {
-	
+
 
 	//Show how to type
 	printMatrixInputMethod();
@@ -131,40 +132,61 @@ int Matrix::detMatrix()
 	int r_max1 = mat.size();    //Number of rows, mat 1 
 	int c_max1 = mat[0].size();  //Number of columns, mat 1
 
+
+
 	if (r_max1 == c_max1)
 	{
-		cout << "\n I can count it! " << endl;
-
-		int det=1; //determinant
-
-		// creating triangle matrix
-		for (int k = 0; k < r_max1 - 1; k++)
-		{
-			
-			for (int i = k + 1; i < r_max1; i++)
-			{
-				for (int j = r_max1 - 1; j >= k; j--)
-				{
-					mat[i][j] = mat[i][j] - mat[i][k] * mat[k][j] / mat[k][k];
-				}
-			}
-		}
-		//Determinant
-		for (int i = 0; i < r_max1; i++)
-		{
-			det = det * mat[i][i];
-		}
-		cout << "Determinant of given matrix is: " << det<< endl<<endl;
-
 		
+		cout << "Determinant of given matrix is: " << determinant(mat,r_max1) << endl << endl;
 	}
+	
 	else
 		cout << "I can't count it ;( matrix must be square" << endl;
 
-	return 3;
+
+	return 1;
 }
 
+// Determinant of matrix-specific calculation
 
+double Matrix::determinant(vector<vector<int> > mat, int r_max1)
+{
+	double det = 0;
+	if (r_max1 == 1) return mat[0][0];
+	else
+	{
+
+		for (int i = 0; i < r_max1; i++)
+		{
+
+			int j, k;
+			vector<vector<int> > detmat;
+			//vector<vector<int> > detmat(r_max1 - 1); //zamiast pushbackowania "row" mogê podaæ rozmiar pierwszego)
+			
+			for (j = 0; j < r_max1 - 1; j++) // 'j' iterates for rows 
+			{
+				vector<int> row;         //row vector
+				detmat.push_back(row);
+				for (k = 0; k < r_max1 - 1; k++)
+				{
+					if (k < i)
+					{
+						detmat[j].push_back(mat[j + 1][k]);
+					}
+					if (k >= i)
+					{
+						detmat[j].push_back(mat[j + 1][k + 1]);
+					}
+				}
+			}
+				det = det + (mat[0][i] * pow(-1, i + 2)*determinant(detmat, r_max1 - 1));
+			
+		}
+
+
+	}
+	return det;
+}
 
 
 //************************************************************************************
@@ -179,7 +201,7 @@ vector<vector<int>> Matrix::putin()
 
 	string user_input;
 
-	int size_of_row = 1;// default lenght of the shortest row in matrix, assumes at least 1 value
+	int size_of_row = 1;// detault lenght of the shortest row in matrix, assumes at least 1 value
 	
 	do
 	{
@@ -216,7 +238,7 @@ vector<vector<int>> Matrix::putin()
 				//cout << "\t" << row_vector[i];   //not
 			}
 
-			//*Check if created vector is longest than previous one (default size is set to 1) 
+			//*Check if created vector is longest than previous one (detault size is set to 1) 
 			if (size_of_row < row_vector.size())
 			{
 				size_of_row = row_vector.size(); //* if it is longest - we set a new value for size_of_row    
@@ -293,7 +315,7 @@ void Matrix::printMatrixInputMethod()
 	cout << " Please enter the values of matrix like this :" << endl << endl;
 	cout << " 1,2,3  \t press enter " << endl;
 	cout << " 4,,6   \t press enter " << endl;
-	cout << " 7,8,9q \t press enter, \"q\" informs that this is last row of matrix" << endl;
+	cout << " 7,8,9q \t press 'q',press enter, \"q\" informs that this is last row of matrix" << endl;
 		
 
 	cout<<"\t It prints out the  following output:" << endl << endl;
