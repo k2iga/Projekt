@@ -1,13 +1,16 @@
+//CLASS MENU
 #include<iostream>
 #include<string>
 #include<vector>       
 #include<cstdlib>  //for exit
 #include "Menu.h"
 #include "Matrix.h"
+#include"MatrixCalculator.h"
 class Matrix;
 
-vector<string>choose;
-vector<string>choose_in_matrix;
+using namespace std;
+   vector<string>choose;
+   vector<string>choose_in_matrix;
 
 //default constructor
 Menu::Menu()
@@ -27,16 +30,18 @@ Menu::Menu()
 void Menu::start()
 {
 	showMenu(choose);
-	getNumber();
+	askForChoice();
 }
 
 void Menu::Matrix_submenu()
 {
+
 	Matrix mat;
+	MatrixCalculator mc;
 	showMenu(choose_in_matrix);
 
 	int choice;
-	cin >> choice;
+	   cin >> choice;
 
 	switch (choice)
 	{
@@ -44,11 +49,11 @@ void Menu::Matrix_submenu()
 		exit(1);
 		break;
 	case add:
-		mat.addMatrices();
+		mc.addMatrices();
 		Matrix_submenu();
 		break;
 	case multiply:
-		mat.multiplyMatrices();
+		mc.multiplyMatrices();
 		//Matrix_submenu();
 		break;
 	case determinant:
@@ -56,31 +61,31 @@ void Menu::Matrix_submenu()
 		//Matrix_submenu();
 		break;
 	default:
-		cout << "\n O o o try again" << endl;
-		Matrix_submenu(); //Uwaga! funkcja wywo³uje sam¹ siebie! 
+		   cout << "\n O o o try again" <<    endl;
+		Matrix_submenu(); 
 	}
 }
 
-void Menu::showMenu(vector<string> choose)
+void Menu::showMenu(vector<   string> choose)
 {
-	cout << "\t         MENU" << endl << endl;
-	cout << "\t You must choose, but choose wisely. \n" << endl;
+	   cout << "\t         MENU" <<    endl <<    endl;
+	   cout << "\t You must choose, but choose wisely. \n" <<    endl;
 
 	for (size_t i = 0; i <choose.size(); ++i)   //signed/unsigned mismatch so 'int i' changed  to 'size_t i'
 	{                                           //as stackoverflow experts advises
-		cout << "\t" << i << choose[i];
+		   cout << "\t" << i << choose[i];
 	}
 
 }
 
-void Menu::getNumber()
+void Menu::askForChoice()
 {
 
 	Matrix mat;
 
 	//Choose of the number
 	int chosen_number;
-	std::cin >> chosen_number;
+	   cin >> chosen_number;
 
 	switch (chosen_number)
 	{
@@ -89,23 +94,23 @@ void Menu::getNumber()
 		break;
 
 	case matrix:
-		cout << "\n You choose matrix" << endl << endl;
+		   cout << "\n You choose matrix" <<    endl <<    endl;
 		Matrix_submenu();
 		break;
 
 	case equation:
-		cout << "\n You choose equation" << endl;
+		   cout << "\n You choose equation" <<    endl;
 		//function of 
 		break;
 
 	case polynomial:
-		cout << "\n You choose poly" << endl;
+		   cout << "\n You choose poly" <<    endl;
 		//function of poly
 		break;
 
 	default:
 
-		cout << "\n O o o try again" << endl;
+		   cout << "\n O o o try again" <<    endl;
 		start();
 
 	}
