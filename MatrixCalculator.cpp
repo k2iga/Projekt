@@ -15,17 +15,23 @@ MatrixCalculator::MatrixCalculator()
 }
 
 //Adding matrices
-vector<vector<int>> MatrixCalculator::addMatrices()
+//vector<vector<int>> 
+
+Matrix& MatrixCalculator::addMatrices(const Matrix& matrix_1,const Matrix& matrix_2 )
 {
 	MatrixReader mr;  
-	vector<vector<int>>resultant_matrix;
+	//vector<vector<int>>resultant_matrix;
+	Matrix resultant_matrix;   //czyli wszêdzie (resultant_matrix.matrix)
+	//Matrix matrix_1;
+	//Matrix matrix_2;
 
 	//Show how to type
 	MatrixReader::printMatrixInputMethod(); 
 
 	//Take values for first matrix
 	
-	vector<vector<int>>matrix_1 = mr.readMatrix().matrix;
+	//vector<vector<int>>matrix_1 = mr.readMatrix().matrix;
+	mr.readMatrix();////?????????????
 
 	//Caution
 	cout << "\n Matrices should have the same sizes! " << endl << endl;
@@ -33,14 +39,16 @@ vector<vector<int>> MatrixCalculator::addMatrices()
 
 	//Take values for second matrix
 	cout << "\n Please enter the values of latter matrix:" << endl << endl;
-	vector<vector<int>>matrix_2 = mr.readMatrix().matrix;
 
+	mr.readMatrix();
+	//matrix_2.matrix=mr.readMatrix();
+//	vector<vector<int>>matrix_2 = mr.readMatrix().matrix;
 
-	int r_max = matrix_1.size();    //Number of rows of first matrix 
-	int c_max = matrix_1[0].size();  //Number of columns of first matrix
+	int r_max = (matrix_1.matrix).size();    //Number of rows of first matrix 
+	int c_max = (matrix_1.matrix)[0].size();  //Number of columns of first matrix
 
-	int r_max2 = matrix_2.size();    //Number of rows  of second matrix
-	int c_max2 = matrix_2[0].size();  //Number of columns of second matrix
+	int r_max2 = (matrix_2.matrix).size();    //Number of rows  of second matrix
+	int c_max2 = (matrix_2.matrix)[0].size();  //Number of columns of second matrix
 
 
 
@@ -53,17 +61,17 @@ vector<vector<int>> MatrixCalculator::addMatrices()
 		for (int i = 0; i < r_max; i++)
 		{
 			vector<int> v;
-			resultant_matrix.push_back(v);
+			(resultant_matrix.matrix).push_back(v);
 			// resultant_matrix.push_back(*(new vector<int>));
 			for (int j = 0; j < c_max; j++)
 			{
-				resultant_matrix[i].push_back(matrix_1[i][j] + matrix_2[i][j]);
+				(resultant_matrix.matrix)[i].push_back((matrix_1.matrix)[i][j] + (matrix_2.matrix)[i][j]);
 			}
 		}
 
 		//Printout of resultant matrix
 		cout << "\n  Values of the resultant matrix: " << endl << endl;
-		mr.printoutMatrix(resultant_matrix);                                    //domyœlnie  w MatrixReader
+		mr.printoutMatrix((resultant_matrix.matrix));                                    
 
 	}
 	else
@@ -75,10 +83,10 @@ cout  << "\n Sorry, matrix should have the same size: " << endl << endl;
 //***************************************************************************************************************
 
 //Matrix multiplication
-vector<vector<int> > MatrixCalculator::multiplyMatrices()
+Matrix& MatrixCalculator::multiplyMatrices()
 {
 	MatrixReader mr;
-	vector<vector<int> >resultant_multiply;
+	Matrix resultant_multiply;
 
 	//Show how to type
 	MatrixReader::printMatrixInputMethod();
@@ -121,10 +129,10 @@ vector<vector<int> > MatrixCalculator::multiplyMatrices()
 				rv.push_back(mn);
 			}
 
-			resultant_multiply.push_back(rv);
+			(resultant_multiply.matrix).push_back(rv);
 		}
 
-		mr.printoutMatrix(resultant_multiply);
+		mr.printoutMatrix((resultant_multiply.matrix));
 
 	}
 	else

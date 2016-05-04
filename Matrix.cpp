@@ -30,15 +30,15 @@ int Matrix::detMatrix()
 	vector<vector<int>>mat = mr.readMatrix().matrix;
 
 
-	int r_max1 = mat.size();    //Number of rows, mat 1 
-	int c_max1 = mat[0].size();  //Number of columns, mat 1
+	//int r_max1 = mat.size();    //Number of rows, mat 1 
+	//int c_max1 = mat[0].size();  //Number of columns, mat 1
 
 
 
-	if (r_max1 == c_max1)
+	if (r_max == c_max)
 	{
 		
-		  cout << "Determinant of given matrix is: " << determinant(mat,r_max1) <<   endl <<   endl;
+		  cout << "Determinant of given matrix is: " << determinant(mat,r_max) <<   endl <<   endl;
 	}
 	
 	else

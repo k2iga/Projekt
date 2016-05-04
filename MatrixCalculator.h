@@ -3,13 +3,17 @@
 
 #include<vector>
 #include<string>
+#include "Matrix.h"
 
-class MatrixCalculator
+class  MatrixCalculator
 {
 public:
 	MatrixCalculator();
-	std::vector<std::vector<int>> addMatrices();
-	std::vector < std::vector<int>> multiplyMatrices();
+	//std::vector<std::vector<int>>
+		Matrix& addMatrices(const Matrix& matrix_1, const Matrix& matrix_2); //const reference -we guarantee to the caller 
+		                                                       //that the function won't change the value
+		                                                       //of the argument
+	    Matrix& multiplyMatrices();
 
 };
 

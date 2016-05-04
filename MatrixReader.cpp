@@ -35,7 +35,7 @@ void MatrixReader::printMatrixInputMethod()
 
 //Taking values of matrix from user   
 
-Matrix MatrixReader::readMatrix()
+Matrix& MatrixReader::readMatrix()
 {
 	Matrix matrix_one;
     //vector<vector<int>>matrix_one;
@@ -109,7 +109,7 @@ Matrix MatrixReader::readMatrix()
 	printoutMatrix((matrix_one.matrix));
 
 
-	return  matrix_one;
+	return  matrix_one;  //return object of class Matrix 
 
 }
 

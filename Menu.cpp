@@ -5,6 +5,7 @@
 #include<cstdlib>  //for exit
 #include "Menu.h"
 #include "Matrix.h"
+#include "MatrixReader.h"
 #include"MatrixCalculator.h"
 class Matrix;
 
@@ -36,7 +37,9 @@ void Menu::start()
 void Menu::Matrix_submenu()
 {
 
-	Matrix mat;
+	Matrix mat,a,b;
+	MatrixReader mr; //a, b;
+	
 	MatrixCalculator mc;
 	showMenu(choose_in_matrix);
 
@@ -49,7 +52,8 @@ void Menu::Matrix_submenu()
 		exit(1);
 		break;
 	case add:
-		mc.addMatrices();
+		//a=mr.readMatrix();
+		mc.addMatrices(a,b);
 		Matrix_submenu();
 		break;
 	case multiply:
